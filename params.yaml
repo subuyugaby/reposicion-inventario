@@ -1,0 +1,45 @@
+seed: 42
+
+rutas:
+  kaggle: data/kaggle            # archivos originales de Kaggle (los coloca quien ejecuta el producto)
+  historico: data/historico      # carga histórica inicial
+  bandeja: bandeja               # sistema de origen simulado: se lee, nunca se modifica
+  landing: data/landing          # entregas validadas
+  cuarentena: data/cuarentena    # entregas rechazadas y su motivo
+  procesado: data/procesado      # features de cada fecha de corte
+  publicado: data/publicado      # pronósticos y pedidos publicados
+  seguimiento: data/seguimiento  # desempeño de lo publicado
+  modelos: models
+  reportes: reportes
+
+bandeja:
+  inicio: "2017-01-01"           # lo anterior es la carga histórica; desde aquí llega por la bandeja
+  prob_retraso_ventas: 0.04      # días de ventas que llegan de 2 a 4 días tarde
+  prob_correccion_ventas: 0.04   # días entregados con un error y corregidos días después
+  prob_archivo_invalido: 0.01    # entregas con datos inválidos, reenviadas al día siguiente
+
+pronostico:
+  horizonte: 14                  # días pronosticados después de la fecha de corte
+  dias_pedido: 7                 # días que cubre el pedido sugerido
+  cuantiles: [0.1, 0.5, 0.9]
+  max_dias_sin_ventas: 14        # sin ventas más recientes que esto, no se publica
+
+modelo:
+  nombre_registro: reposicion-inventario
+  semanas_entrenamiento: 52
+  semanas_validacion: 4
+  semanas_evaluacion: 4
+  lightgbm:
+    objective: tweedie
+    tweedie_variance_power: 1.2
+    n_estimators: 400
+    learning_rate: 0.05
+    num_leaves: 63
+    min_child_samples: 50
+    subsample: 0.8
+    subsample_freq: 1
+    colsample_bytree: 0.8
+
+promocion:
+  mejora_minima_costo: 0.02      # el challenger debe bajar el costo de negocio al menos 2 %
+  max_aumento_wape: 0.0          # y no puede empeorar el WAPE

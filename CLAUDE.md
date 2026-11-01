@@ -6,7 +6,7 @@ Laboratorio 1 de Product Development: Git + DVC + Airflow 3 + MLflow.
 
 ## Comandos
 - `make venv` · `make test`: entorno local (Python 3.12) y pruebas.
-- `make up` · `make down`: Airflow en http://localhost:8080 y MLflow en http://localhost:5000.
+- `make up` · `make down`: Airflow en http://localhost:8080 y MLflow en http://localhost:5001.
 - `make bandeja`: carga histórica y bandeja a partir de data/kaggle/.
 - `make backfill DESDE=… HASTA=…`: ejecuta los tres DAGs sobre un periodo.
 - `make versionar`: `dvc add` de datos, modelos y pronósticos, y `dvc push`.

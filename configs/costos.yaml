@@ -1,0 +1,12 @@
+# Costos por unidad, expresados en unidades de venta. Es una decisión de negocio:
+# si cambia, cambia el pedido sugerido sin tocar el código ni reentrenar.
+# El pedido se calcula en el cuantil faltante / (faltante + sobrante) del pronóstico.
+
+por_defecto:
+  faltante: 1.0    # margen perdido por cada unidad que no se pudo vender
+  sobrante: 0.25   # costo de mantener en inventario cada unidad que sobra
+
+perecederos:
+  familias: [PRODUCE, DAIRY, MEATS, POULTRY, SEAFOOD, BREAD/BAKERY, EGGS, DELI]
+  faltante: 1.0
+  sobrante: 0.9    # merma: casi todo lo que sobra se pierde
