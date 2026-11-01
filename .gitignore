@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.env
+airflow/logs/
+mlflow/
+data/cuarentena/
+data/seguimiento/
+.claude/worktrees/
+/bandeja
