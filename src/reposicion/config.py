@@ -42,6 +42,8 @@ def git_commit() -> str:
     """Commit actual, leído de .git (la imagen de Airflow no necesita el binario de git)."""
     git = raiz() / ".git"
     try:
+        if git.is_file():  # worktree: .git apunta a su carpeta dentro del repositorio principal
+            git = Path(git.read_text().split("gitdir:")[1].strip())
         head = (git / "HEAD").read_text().strip()
         if not head.startswith("ref: "):
             return head

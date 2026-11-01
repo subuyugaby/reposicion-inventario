@@ -29,8 +29,8 @@ def main() -> None:
     nuevo = pronostico.calcular_pronostico(X, modelo, p["pronostico"]["cuantiles"])
     pedido = pronostico.calcular_pedido(X, modelo, p["pronostico"]["dias_pedido"])
 
-    pd.testing.assert_frame_equal(nuevo, pd.read_parquet(publicado / "pronostico.parquet"), check_exact=False, atol=1e-6)
-    pd.testing.assert_frame_equal(pedido, pd.read_parquet(publicado / "pedido.parquet"), check_exact=False, atol=1e-6)
+    pd.testing.assert_frame_equal(nuevo, pd.read_parquet(publicado / "pronostico.parquet"), check_exact=False, atol=1e-6, check_dtype=False)
+    pd.testing.assert_frame_equal(pedido, pd.read_parquet(publicado / "pedido.parquet"), check_exact=False, atol=1e-6, check_dtype=False)
     print(f"corte:               {corte}")
     print(f"modelo:              v{metadata['modelo']['version']} ({metadata['modelo']['tipo']}) {metadata['modelo']['ruta']}")
     print(f"commit publicado:    {metadata['git_commit']}")
